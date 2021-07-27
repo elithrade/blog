@@ -2,6 +2,7 @@ theme:
   name: material
 
 site_name: Memory blocks
+site_url: https://elithrade.github.io/blog/
 
 markdown_extensions:
   - pymdownx.highlight
