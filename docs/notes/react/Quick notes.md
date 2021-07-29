@@ -55,3 +55,13 @@ And here is the picture for the nested setTimeout:
 
 The nested `setTimeout` guarantees the fixed delay (here 100ms).
 That’s because a new call is planned at the end of the previous one.
+
+## Cannot assign to 'current' because it i a read-only property
+
+When using React's `useRef` hook, if it is initialised with `null` default value, then `tsserver` will complain about the error.
+
+The reason is described [ in this comment ]( https://github.com/DefinitelyTyped/DefinitelyTyped/issues/31065#issuecomment-446425911).
+
+*It's intentionally left readonly to ensure correct usage, even if it's not frozen. Refs initialized with `null` without specifically indicating you want to be able to assign `null` to it are interpreted as `refs` you want to be **managed by React** , i.e. React "owns" the current and you're just viewing it.*
+
+*If you want a mutable `ref` object that starts with a `null` value, make sure to also give `| null` to the generic argument. That will make it mutable, because you "own" it and not React.*
