@@ -29,3 +29,23 @@ Ideas or definitions that are heard but not sure what they mean.
       if i < 5:
           small_nums.append(i)
   ```
+
+## [Nullish assignments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators)
+
+The nullish coalescing operator is evaluated left to right, it is tested for possible short-circuit evaluation using the following rule:
+`(some expression that is neither null nor undefined) ?? expr` is short-circuit evaluated to the left-hand side expression if left-hand side proves to be either `null` or `undefined`.
+It is equivalent to `x ?? (x = y);`.
+```
+x = 10
+> 10
+y = 20
+> 20
+x ?? y
+> 10
+x = undefined
+> undefined
+x ??= y
+> 20
+x ??= 30
+> 20
+```
