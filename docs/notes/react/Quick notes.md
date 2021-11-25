@@ -65,3 +65,13 @@ The reason is described [ in this comment ]( https://github.com/DefinitelyTyped/
 *It's intentionally left readonly to ensure correct usage, even if it's not frozen. Refs initialized with `null` without specifically indicating you want to be able to assign `null` to it are interpreted as `refs` you want to be **managed by React** , i.e. React "owns" the current and you're just viewing it.*
 
 *If you want a mutable `ref` object that starts with a `null` value, make sure to also give `| null` to the generic argument. That will make it mutable, because you "own" it and not React.*
+
+## Difference between `e.currentTarget` and `e.target`
+
+* `e.currentTarget` is the element the event is attached to.
+* `e.target` is the element that triggers the event.
+
+## Difference between `e.preventDefault` and `e.stopPropagation`
+
+* `e.preventDefault` will stop the browser handling the event.
+* `e.stopPropagation` will stop event bubbling up to the parent elements.
