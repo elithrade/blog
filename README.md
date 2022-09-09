@@ -58,3 +58,22 @@ mkdocs build
 `./site` will be generated that contains all the `html` pages needed to host the site.
 
 # Integrate with GitHub Pages
+We can integrate the static site with with `{username}.github.io`.
+We need to:
+1. Create a new repo in GitHub
+2. Push the content to repo
+3. (Optional) Update `mkdocs.yml` by adding `site_url` and pointing to `{username}.github.io/{repo_name}`. It will always use the repo name as `site_url`.
+```
+git init
+git add .
+git commit -m 'Initial commit'
+git remote add origin git@github.com:{username}/{repo_name}.git
+git branch -M main
+git push -u origin main
+```
+
+## Publish locally
+Push the local static content to GitHub Pages.
+```
+mkdocs gh-deploy --force
+```
