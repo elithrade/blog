@@ -2,6 +2,8 @@
 
 This repo is made using [MkDocs](https://www.mkdocs.org/user-guide/deploying-your-docs/).
 
+The site is hosted at https://elithrade.github.io/blog/ using GitHub Pages. This repo currently only contains some technical study notes although it is called blog.
+
 All the files are in `Markdown` located under `/docs` folder.
 
 [MkDocs](https://www.mkdocs.org/user-guide/deploying-your-docs/) is a static site generator geared towards (technical) project documentation.
