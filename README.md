@@ -1,10 +1,10 @@
 # My personal blog
 
-This repo is made using [MkDoc](https://www.mkdocs.org/user-guide/deploying-your-docs/).
+This repo is made using [MkDocs](https://www.mkdocs.org/user-guide/deploying-your-docs/).
 
 All the files are in `Markdown` located under `/docs` folder.
 
-[MkDoc](https://www.mkdocs.org/user-guide/deploying-your-docs/) is a static site generator geared towards (technical) project documentation.
+[MkDocs](https://www.mkdocs.org/user-guide/deploying-your-docs/) is a static site generator geared towards (technical) project documentation.
 This repo is made using [Material for MkDocs]. For local installation, `Python` and `pip` is required.
 
 `pip` can be installed on Ubuntu 20.04 using:
