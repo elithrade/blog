@@ -1,0 +1,1361 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://elithrade.github.io/blog/notes/aws/AWS%20solution%20architect%20associate/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>AWS solution architect associate - Memory blocks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-solution-architect-associate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Memory blocks" class="md-header__button md-logo" aria-label="Memory blocks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Memory blocks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS solution architect associate
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Memory blocks" class="md-nav__button md-logo" aria-label="Memory blocks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Memory blocks
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Api design
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Api design" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Api design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-design/RESTful%20API%20design/" class="md-nav__link">
+        RESTful web API design
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Aws
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Aws" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Aws
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          AWS solution architect associate
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        AWS solution architect associate
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-services" class="md-nav__link">
+    High Level Services
+  </a>
+  
+    <nav class="md-nav" aria-label="High Level Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#difference-between-regions-availability-zones-and-edge-location" class="md-nav__link">
+    Difference between Regions, Availability Zones and Edge Location
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iam-identity-management-service" class="md-nav__link">
+    IAM (Identity Management Service)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s3" class="md-nav__link">
+    S3
+  </a>
+  
+    <nav class="md-nav" aria-label="S3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-consistency" class="md-nav__link">
+    Data Consistency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-encryption" class="md-nav__link">
+    Security and Encryption
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-management" class="md-nav__link">
+    Lifecycle Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-region-replication" class="md-nav__link">
+    Cross Region Replication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudfront" class="md-nav__link">
+    CloudFront
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snowball" class="md-nav__link">
+    Snowball
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-gateway" class="md-nav__link">
+    Storage Gateway
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ec2" class="md-nav__link">
+    EC2
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pricing-models" class="md-nav__link">
+    Pricing Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ec2-security-groups" class="md-nav__link">
+    EC2 Security Groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ebs" class="md-nav__link">
+    EBS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-store-volumes" class="md-nav__link">
+    Instance Store Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypted-root-device" class="md-nav__link">
+    Encrypted Root Device
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudwatch" class="md-nav__link">
+    CloudWatch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iam-roles-with-ec2" class="md-nav__link">
+    IAM Roles with EC2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efs-elastic-file-system" class="md-nav__link">
+    EFS (Elastic File System)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/Quick%20notes/" class="md-nav__link">
+        Quick notes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          Microservices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Microservices" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Microservices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../microservices/Building%20microservices%20with%20AWS%20Lambda/" class="md-nav__link">
+        Building Microservices with AWS Lambda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../microservices/Microservices%20architecture/" class="md-nav__link">
+        Microservices architecture
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5">
+          Practices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Practices" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Practices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practices/Code%20review/" class="md-nav__link">
+        Code review
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6">
+          React
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="React" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          React
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/Quick%20notes/" class="md-nav__link">
+        React quick notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/React%20testing%20library/" class="md-nav__link">
+        React testing library
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" type="checkbox" id="__nav_2_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7">
+          Security
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Security" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Security
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/JWT/" class="md-nav__link">
+        JWT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          Til
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Til" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Til
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../til/til/" class="md-nav__link">
+        Today I Learned
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-services" class="md-nav__link">
+    High Level Services
+  </a>
+  
+    <nav class="md-nav" aria-label="High Level Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#difference-between-regions-availability-zones-and-edge-location" class="md-nav__link">
+    Difference between Regions, Availability Zones and Edge Location
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iam-identity-management-service" class="md-nav__link">
+    IAM (Identity Management Service)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s3" class="md-nav__link">
+    S3
+  </a>
+  
+    <nav class="md-nav" aria-label="S3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-consistency" class="md-nav__link">
+    Data Consistency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-encryption" class="md-nav__link">
+    Security and Encryption
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-management" class="md-nav__link">
+    Lifecycle Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-region-replication" class="md-nav__link">
+    Cross Region Replication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudfront" class="md-nav__link">
+    CloudFront
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snowball" class="md-nav__link">
+    Snowball
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-gateway" class="md-nav__link">
+    Storage Gateway
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ec2" class="md-nav__link">
+    EC2
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pricing-models" class="md-nav__link">
+    Pricing Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ec2-security-groups" class="md-nav__link">
+    EC2 Security Groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ebs" class="md-nav__link">
+    EBS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-store-volumes" class="md-nav__link">
+    Instance Store Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypted-root-device" class="md-nav__link">
+    Encrypted Root Device
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudwatch" class="md-nav__link">
+    CloudWatch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iam-roles-with-ec2" class="md-nav__link">
+    IAM Roles with EC2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efs-elastic-file-system" class="md-nav__link">
+    EFS (Elastic File System)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="aws-solution-architect-associate">AWS solution architect associate</h1>
+<h2 id="high-level-services">High Level Services</h2>
+<h3 id="difference-between-regions-availability-zones-and-edge-location">Difference between Regions, Availability Zones and Edge Location</h3>
+<ul>
+<li>Availability zone is basically a data centre, or multiple data centres are close to each other.</li>
+<li>Region is a geographical area, contains two or more availability zones. Each region is a separate geographic area. * Each region has multiple, isolated locations known as Availability Zones.</li>
+<li>Edge locations are for AWS to cache contents, e.g. if a user in Sydney requires content from New York region, the content will be first downloaded from New York and stored in Sydney, so if the same content is requested again it will be available from the Sydney region. Currently there are more than 150 edge locations around the world.</li>
+</ul>
+<h3 id="vpc">VPC</h3>
+<p>A Virtual Private Cloud (VPC) is a virtual network dedicated to a single AWS account. It is logically isolated from other virtual networks in the AWS cloud, providing compute resources with security and robust networking functionality. </p>
+<h2 id="iam-identity-management-service">IAM (Identity Management Service)</h2>
+<ul>
+<li>Users, end users such as employees of an organisation.
+Groups, a collection of users, each user in the group inherits the permissions of the group.</li>
+<li>Policies, json format documents describe the permissions that user, group or role can or cannot do.</li>
+<li>Roles can be assigned to AWS resources.</li>
+<li>IAM created users are global and not tied down to a region, same for group and role.</li>
+<li>A root account is the one that created AWS account, it has complete admin access.</li>
+<li>When a user is created, it has no permissions by default.</li>
+</ul>
+<h2 id="s3">S3</h2>
+<h3 id="basics">Basics</h3>
+<ul>
+<li>When uploading a file, a HTTP 200 code is received to indicate upload is successful.</li>
+<li>Creating a bucket will generate a unique HTTPS link.</li>
+<li>Object-based, think of objects as files. You cannot use it as databases. It can consist of the following:</li>
+<li>Key, the name of the object.</li>
+<li>Value, the data, made up of sequence of bytes.</li>
+<li>Version ID, S3 allows you to have multiple versions of a file.</li>
+<li>Metadata, data about the data you store.</li>
+<li>Subresources:<ul>
+<li>Access Control Lists.</li>
+<li>Torrent.</li>
+</ul>
+</li>
+</ul>
+<h3 id="data-consistency">Data Consistency</h3>
+<ul>
+<li>Read after write consistency, if you write a file and immediately read after, you will be able to view the data.</li>
+<li>Eventual consistency, If you update an existing file or delete a file, and read immediately, you may get the old version or you may not. Basically changes to existing objects can take a bit of time to propagate.</li>
+</ul>
+<h3 id="features">Features</h3>
+<ul>
+<li>Tiered storage</li>
+<li>S3 standard, 99.99% availability, 99.99..% (11 9s’) durability.</li>
+<li>Stored redundantly across multiple devices in multiple facilities, designed to sustain the loss of 2 facilities.</li>
+<li>S3 IA (infrequently accessed), for data access less frequently, but require rapid access when needed. Cost less than S3, but charged on retrieval.</li>
+<li>S3 One Zone IA, same as IA, low cost, do not require multiple available availability zone.</li>
+<li>S3 Intelligent Tiering, using ML to determine tier automatically based on how your data is accessed. Introduced in 2018.</li>
+<li>S3 Glacier, secure, durable, and low cost storage, retrieval time varies from minutes to hours.</li>
+<li>S3 Glacier Deep Archive, lowest cost storage, retrieval time of 12 hours is acceptable.</li>
+<li>Lifecycle management.</li>
+<li>Versioning.</li>
+<li>Encryption.</li>
+<li>MFA authentication for deleting objects, data protection.</li>
+<li>Secure your data using Access Control Lists and Bucket Policies, basically permissions for objects and buckets.</li>
+<li>Cross region replication, upload in one region data will be replicated to other regions.</li>
+<li>S3 Transfer Acceleration, takes advantage of CloudFront global distributed edge locations, data is routed to S3 using optimised network path.</li>
+</ul>
+<p><em>Read S3 FAQ before taking the exam</em>.</p>
+<h3 id="security-and-encryption">Security and Encryption</h3>
+<ul>
+<li>Security is achieved by using Access Control Lists (for files)  and Bucket Policies (for buckets).</li>
+<li>Encryption in transit, using SSL/TLS, like HTTPS.</li>
+<li>Encryption at rest, server side encrypted, is achieved using:</li>
+<li>S3 managed key, used to encrypt and decrypt objects. SSE-S3 (server side encryption S3), managed by Amazon.</li>
+<li>AWS Key Management Service. SSE-KMS.</li>
+<li>SSE-C with customer provided key.</li>
+<li>Client side encryption, you upload encrypted objects to S3.</li>
+</ul>
+<h3 id="versioning">Versioning</h3>
+<ul>
+<li>Once the bucket with the versioning turned on, it cannot be turned off.</li>
+<li>Has MFA delete capability.</li>
+<li>Integrates with Lifecycle rules.</li>
+<li>Upload a newer version of a file changes it’s permission to default access denied.</li>
+<li>With versioning turned on the size of your bucket will grow exponentially.</li>
+<li>Delete versioned file only puts a delete marker to the file, versioned files can be restored by deleting the delete marker. Individual versions can be deleted.</li>
+</ul>
+<h3 id="lifecycle-management">Lifecycle Management</h3>
+<ul>
+<li>Automates moving objects between the different storage tiers.</li>
+<li>Can be used with versioning.</li>
+<li>Can be applied to current version and previous versions.</li>
+</ul>
+<h3 id="cross-region-replication">Cross Region Replication</h3>
+<ul>
+<li>Region must be unique.</li>
+<li>Existing objects on source bucket won’t be replicated. Only new files are replicated.</li>
+<li>Delete marker won’t be replicated.</li>
+<li>Delete individual files or delete marker won’t be replicated.</li>
+</ul>
+<h2 id="cloudfront">CloudFront</h2>
+<ul>
+<li>CloudFront is a global service, not based on region.</li>
+<li>You can restrict access using signed URLs.</li>
+<li>CDN, content delivery network, content cached on Edge location, initial content request will be fetched from the origin, but subsequent content request will be faster.</li>
+<li>Edge Location, the location where the content will be cached, this is separate the a region/AZ.</li>
+<li>Origin, the location stores the content CDN will distribute. This could be a S3 bucket, EC2 instance, Elastic load balancer, or Route53.</li>
+<li>Distribution, a collection of ELs.</li>
+<li>Web Distribution, used for websites.</li>
+<li>RTMP, used for video streaming.</li>
+<li>ELs are not just for reading, but also writing, e.g. S3 accelerated transfer uses CloudFront.</li>
+<li>Objects are cached for TTL (time to live in seconds), which can be configured.</li>
+<li>You can clear cache, but you will be charged for that.</li>
+</ul>
+<h2 id="snowball">Snowball</h2>
+<ul>
+<li>Used to transfer large amounts of data.</li>
+<li>Can be imported to S3.</li>
+<li>Can be exported from S3.</li>
+</ul>
+<h2 id="storage-gateway">Storage Gateway</h2>
+<ul>
+<li>File Gateway, for flat files stored directly to S3.</li>
+<li>Volume Gateways</li>
+<li>Stored volumes, entire dataset is stored on site and synchronously backed up to S3.</li>
+<li>Cached volumes, entire dataset is stored on S3, only the most frequently accessed data will be stored on site.</li>
+<li>Gateway Access Tape Library, options available if backing up tape libraries.</li>
+</ul>
+<h2 id="ec2">EC2</h2>
+<p>Amazon Elastic Compute Cloud is a web service that provides resizable compute capacity in the cloud. Reduce the time required to boot new server instances to minutes, quickly scale capacity, both up and down.
+* Termination Protection is turned off by default.
+* Root volume is where the OS is installed.
+* EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated.
+* EBS root volumes cannot be encrypted. Additional volumes can be encrypted.</p>
+<h3 id="pricing-models">Pricing Models</h3>
+<ul>
+<li>On Demand allows you to pay a fixed rate by hours or seconds, with no commitment.</li>
+<li>Low cost without any upfront payment or long term commitment.</li>
+<li>Applications with short term, spiky, or unpredictable workloads that cannot be interrupted.</li>
+<li>Application being developed or tested on EC2 for the first time.</li>
+<li>Reserved provides you with a capacity reservation, and offer a significant discount on hourly charge for an instance. Contract terms are 1 year or 3 years.</li>
+<li>Steady state or predictable usage.</li>
+<li>Require reserved capacity.</li>
+<li>Users are able to make upfront payments to reduce their computing cost even further.</li>
+<li>Spot enables you to bid whatever price you want for instance capacity, works like a stock market.</li>
+<li>Flexible start end times.</li>
+<li>Applications that are only feasible at very local computer prices.</li>
+<li>Users with urgent computing needs for large amounts of additional capacity.</li>
+<li>Dedicated</li>
+<li>Useful for regulatory requirements not support multi-tenant virtualization.</li>
+<li>Licensing doesn’t support multi-tenancy or cloud deployments.</li>
+<li>Note you won’t be charged for partial hours of usage if your spot instance is terminated. If you terminate the instance yourself, you will be charged for any hour in which the instance ran.</li>
+</ul>
+<h3 id="ec2-security-groups">EC2 Security Groups</h3>
+<ul>
+<li>Every time you make a change to the security group the change will take effect immediately.</li>
+<li>When an Inbound rule is created a corresponding Outbound rule is created for the inbound rule. It is Stateful.</li>
+<li>Everything is blocked by default.</li>
+<li>All outbound traffic us allowed.</li>
+<li>You can have any number of EC2 instances within a security group.</li>
+<li>You can have multiple security groups attached to EC2 instances.</li>
+<li>You cannot block specific IP addresses, you can only specify allow rules not deny rules.</li>
+</ul>
+<h3 id="ebs">EBS</h3>
+<ul>
+<li>Virtual hard disk, snapshots exist on S3.</li>
+<li>Snapshots are incremental, this means that only the blocks that have changed since your last snapshot are moved to S3.</li>
+<li>You should stop the instance before taking the snapshot, but you can take a snapshot while it is running.</li>
+<li>You can create AMIs from both volumes and snapshots.</li>
+<li>EBS volume size and type can be changed on the fly.</li>
+<li>Wherever your EC2 instance is, the volume will alway be in the same region.</li>
+<li>If EC2 instance is deleted the root device is deleted too by default. However additional volumes attached to the instance stay persist.</li>
+<li>To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ. SImilarly the EC2 instance can be moved to another region.</li>
+</ul>
+<h3 id="instance-store-volumes">Instance Store Volumes</h3>
+<ul>
+<li>Instance Store Volumes (Ephemeral) cannot be stopped, if the underlying hosts fails, you lose your data.</li>
+<li>You can reboot EBS or ISV, data will not be lost.</li>
+<li>Both root volumes will be deleted on termination.</li>
+<li>It is mainly used for constant changing data, since ISVs are closer to physical memory and much faster than EBS.</li>
+</ul>
+<h3 id="encrypted-root-device">Encrypted Root Device</h3>
+<ul>
+<li>Snapshots of encrypted volumes are encrypted automatically.</li>
+<li>Volumes restored from encrypted snapshots are encrypted automatically.</li>
+<li>Snapshots can only be shared if they are unencrypted.</li>
+<li>Snapshots can be shared with other AWS accounts or made public.</li>
+<li>You can now encrypt root device volumes upon creation of the ECs instance.</li>
+<li>On existing volume, create a snapshot, copy the snapshot enable it with encryption, then create an AMI.</li>
+<li>New instances can be launched using the encrypted AMI.</li>
+<li>You cannot take an encrypted AMI and launch it as an unencrypted instance.</li>
+</ul>
+<h3 id="cloudwatch">CloudWatch</h3>
+<ul>
+<li>CloudWatch is used to monitor performance.</li>
+<li>CloudWatch can monitor most of AWS as well as your applications.</li>
+<li>CloudWatch with EC2 will monitor events every 5 minutes by default and you can have 1 minute intervals by turning on detailed monitoring.</li>
+<li>CloudWatch alarms can trigger notifications.</li>
+<li>CloudWatch is all about performance and CloudTrial is all about auditing.</li>
+</ul>
+<h3 id="iam-roles-with-ec2">IAM Roles with EC2</h3>
+<ul>
+<li>Roles are more secure than storing your access key and secret access key on EC2 instance.</li>
+<li>Roles are easier to manage, and can be assigned to an EC2 instance after it is created.</li>
+<li>Roles are universal, you can use them in any region.</li>
+</ul>
+<h3 id="efs-elastic-file-system">EFS (Elastic File System)</h3>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../api-design/RESTful%20API%20design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RESTful web API design" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              RESTful web API design
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../general/Quick%20notes/" class="md-footer__link md-footer__link--next" aria-label="Next: Quick notes" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Quick notes
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+    
+  </body>
+</html>
